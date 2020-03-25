@@ -23,7 +23,7 @@ function Processor(opts) {
     {
         "save-content": false,
         "encoding": "utf8",
-        "includes": "*.html", // []
+        "includes": "[\/]*\.html$", // []
         "excludes": []
     };
 
@@ -41,7 +41,7 @@ function Processor(opts) {
  * 
  */
 
-Processor.prototype.process_folder = function (builder, folder, callback) {
+Processor.prototype.process_folder = function (builder, folder, level, levels, callback) {
     var self = this;
 
     fs.readdir(folder, (err, files) => {
@@ -49,7 +49,11 @@ Processor.prototype.process_folder = function (builder, folder, callback) {
             return;
 
         async.eachSeries(files, (file, done) => {
-            self.process_file(builder, folder + "/" + file, done);
+            var targetFile = folder + "/" + file;
+            if (fs.lstatSync(targetFile).isDirectory() && (!levels || (level < levels)))
+                self.process_folder(builder, targetFile, level + 1, levels, done);
+            else 
+                self.process_file(builder, targetFile, level, done);
         },
         (err) => {
             if (err)
@@ -64,24 +68,27 @@ Processor.prototype.process_folder = function (builder, folder, callback) {
  * 
  */
 
-Processor.prototype.process_file = function (builder, file, done) {
+Processor.prototype.process_file = function (builder, file, level, done) {
 
     var self = this;
 
-    if (fs.lstatSync(file).isDirectory()) {
-        self.process_folder(builder, file, done);
-        return;
-    }
+    // if (fs.lstatSync(file).isDirectory()) {
+    //     self.process_folder(builder, file, done);
+    //     return;
+    // }
 
     if (this.includesRegExp && file.match(this.includesRegExp)) {
 
-        var filename = path.basename(file);
-        var data = fs.readFileSync(file, this.opts.encoding);
+        // var filename = path.basename(file);
+        // var data = fs.readFileSync(file, this.opts.encoding);
 
-        console.log(file);
+        builder.build(level, file);
         // var save_content = this.opts ? this.opts["save-content"] : false;
         // this.index_document(builder, filename, data, save_content  ? data : null);
     }
+    // else {
+    //     console.debug("skipping file: " + file);
+    // }
 
     if (done)
         done();
@@ -93,20 +100,21 @@ Processor.prototype.process_file = function (builder, file, done) {
  * the whole content the file as text
  */
 
-Processor.prototype.process = function (builder, inputs) {
+Processor.prototype.process = function (builder, inputs, levels) {
     if (!Array.isArray(inputs))
         inputs = [inputs];
         
     var self = this;
     async.eachSeries(inputs, (inputFile, done) => {
         if (fs.lstatSync(inputFile).isDirectory())
-            self.process_folder(builder, inputFile, done);
+            self.process_folder(builder, inputFile, 0, levels, done);
         else {
-            self.process_file(builder, inputFile, done);
+            self.process_file(builder, inputFile, 0, done);
         }
     },
     (err) => {
-        console.error(err);
+        if (err)
+            console.error(err);
         // builder.finish();
     }
     );

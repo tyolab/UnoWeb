@@ -16,7 +16,6 @@ var params = new Params(optsAvailable, false);
 var opts = params.getOpts();
 var optCount = params.getOptCount();
 
-const builder = new (require('./lib/builder/language-builder'))();
 const processor = new (require('./processor'))();
 
 if (optCount <= 0) {
@@ -45,7 +44,14 @@ console.log("Project source: ", jekyllConfig.source);
 
 var rootFolder = inputs + path.sep + jekyllConfig.source;
 
+const builder = new (require('./lib/builder/language-builder'))(rootFolder);
 processor.process(builder, rootFolder);
 
+for (var key in builder.invertedLangMap.map) {
+    var obj = builder.invertedLangMap.map[key];
+    console.log(key);
+    console.log('path: ' + JSON.stringify(obj.path));
+    console.log('key: ' + obj.key + "\n");
+}
 
 
