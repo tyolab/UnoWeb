@@ -47,11 +47,14 @@ var rootFolder = inputs + path.sep + jekyllConfig.source;
 const builder = new (require('./lib/builder/language-builder'))(rootFolder);
 processor.process(builder, rootFolder);
 
-for (var key in builder.invertedLangMap.map) {
-    var obj = builder.invertedLangMap.map[key];
-    console.log(key);
-    console.log('path: ' + JSON.stringify(obj.path));
-    console.log('key: ' + obj.key + "\n");
-}
+/**
+ * for Debug
+ */
+// for (var key in builder.invertedLangMap.map) {
+//     var obj = builder.invertedLangMap.map[key];
+//     console.log(key);
+//     console.log('path: ' + JSON.stringify(obj.path));
+//     console.log('key: ' + obj.key + "\n");
+// }
 
 
