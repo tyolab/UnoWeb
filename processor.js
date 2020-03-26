@@ -115,7 +115,7 @@ Processor.prototype.process = function (builder, inputs, levels) {
     (err) => {
         if (err)
             console.error(err);
-        // builder.finish();
+        builder.export();
     }
     );
 }

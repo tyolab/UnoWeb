@@ -47,6 +47,8 @@ var rootFolder = inputs + path.sep + jekyllConfig.source;
 const builder = new (require('./lib/builder/language-builder'))(rootFolder);
 processor.process(builder, rootFolder);
 
+// builder.export();
+
 /**
  * for Debug
  */
@@ -56,5 +58,7 @@ processor.process(builder, rootFolder);
 //     console.log('path: ' + JSON.stringify(obj.path));
 //     console.log('key: ' + obj.key + "\n");
 // }
+
+// outputting _i18n files for manual translations
 
 
