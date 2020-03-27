@@ -9,6 +9,7 @@ const path = require('path');
 var Params = require('node-programmer/params');
 
 var optsAvailable = {
+    'dry-run': false
 };
 
 var params = new Params(optsAvailable, false);
@@ -44,7 +45,7 @@ console.log("Project source: ", jekyllConfig.source);
 
 var rootFolder = inputs + path.sep + jekyllConfig.source;
 
-const builder = new (require('./lib/builder/language-builder'))(rootFolder);
+const builder = new (require('./lib/builder/language-builder'))(rootFolder, opts);
 processor.process(builder, rootFolder);
 
 // builder.export();
