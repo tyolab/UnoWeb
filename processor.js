@@ -72,11 +72,6 @@ Processor.prototype.process_file = function (builder, file, level, done) {
 
     var self = this;
 
-    // if (fs.lstatSync(file).isDirectory()) {
-    //     self.process_folder(builder, file, done);
-    //     return;
-    // }
-
     if (this.includesRegExp && file.match(this.includesRegExp)) {
 
         // var filename = path.basename(file);
@@ -86,9 +81,6 @@ Processor.prototype.process_file = function (builder, file, level, done) {
         // var save_content = this.opts ? this.opts["save-content"] : false;
         // this.index_document(builder, filename, data, save_content  ? data : null);
     }
-    // else {
-    //     console.debug("skipping file: " + file);
-    // }
 
     if (done)
         done();
@@ -100,9 +92,14 @@ Processor.prototype.process_file = function (builder, file, level, done) {
  * the whole content the file as text
  */
 
-Processor.prototype.process = function (builder, inputs, levels) {
+Processor.prototype.process = function (builder, inputs, levels, callback) {
     if (!Array.isArray(inputs))
         inputs = [inputs];
+
+    if (typeof levels === 'function') {
+        callback = levels;
+        levels = -1;
+    }
         
     var self = this;
     async.eachSeries(inputs, (inputFile, done) => {
@@ -115,7 +112,9 @@ Processor.prototype.process = function (builder, inputs, levels) {
     (err) => {
         if (err)
             console.error(err);
-        builder.export();
+        //builder.export();
+        if (callback)
+            callback();
     }
     );
 }

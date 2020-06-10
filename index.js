@@ -9,7 +9,7 @@ const path = require('path');
 var Params = require('node-programmer/params');
 
 var optsAvailable = {
-    'dry-run': false,
+    'dry-run': true,
     'selectors': "h1, h2, h3, h4, h5, h6, div, a, p, span, li, button"
 };
 
