@@ -50,8 +50,11 @@ Processor.prototype.process_folder = function (builder, folder, level, levels, c
 
         async.eachSeries(files, (file, done) => {
             var targetFile = folder + "/" + file;
-            if (fs.lstatSync(targetFile).isDirectory() && (!levels || (level < levels)))
-                self.process_folder(builder, targetFile, level + 1, levels, done);
+            if (fs.lstatSync(targetFile).isDirectory())
+                if (levels !== -1 && level >= levels)
+                    done();
+                else
+                    self.process_folder(builder, targetFile, level + 1, levels, done);
             else 
                 self.process_file(builder, targetFile, level, done);
         },

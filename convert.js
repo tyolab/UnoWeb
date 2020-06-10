@@ -15,11 +15,12 @@ var Params = require('node-programmer/params');
 
 var optsAvailable = {
     'dry-run': true,
-    'from': {required: true},
-    'to': 'client',
-    'source': this.to || "client",
+    'source': "client",
     'destination': 'public',
+    'from': {required: true},
 };
+
+optsAvailable.to = '.' + path.sep + optsAvailable.source;
 
 var params = new Params(optsAvailable, false);
 
@@ -46,16 +47,19 @@ jekyll.initializeConfig(opts);
 
 //console.log("Project source: ", jekyllConfig.source);
 
-var rootFolder = inputs + path.sep + jekyll.config.source;
+var rootFolder = opts.to;
 var targetFile = opts.from + path.sep + inputs;
+var templateFolder = path.resolve(__dirname, 'templates/jekyll');
 
-const files = new (require('./lib/builder/files-builder'))(path.resolve(__dirname, 'templates/jekyll'), {
-    "target_dir": opts.to;
+const files = new (require('./lib/builder/files-builder'))(templateFolder, {
+    "target_dir": opts.to
 });
-processor.process(files);
+processor.process(files, templateFolder, function() {
+    const builder = new (require('./lib/builder/site-builder'))(rootFolder, opts);
+    builder.engine = jekyll;
+    processor.process(builder, targetFile);
+});
 
-const builder = new (require('./lib/builder/site-builder'))(rootFolder, opts);
-processor.process(builder, targetFile);
 
 
 
