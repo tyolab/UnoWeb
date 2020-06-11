@@ -8,6 +8,8 @@ const path = require('path');
 
 var Params = require('node-programmer/params');
 
+const engines = require('./lib/engines');
+
 var optsAvailable = {
     'dry-run': true,
     'selectors': "h1, h2, h3, h4, h5, h6, div, a, p, span, li, button"
@@ -29,25 +31,22 @@ var inputs = opts["---"];
 
 // console.log(inputs);
 
-var jekyllConfigFile = inputs + path.sep + "_config.yml";
+const jekyll = engines.createJekyll(inputs);
 
 /**
  * 
  */
-if (!fs.existsSync(jekyllConfigFile)) {
+if (!jekyll.isValid()) {
     console.error("Not a valid jekyll folder");
     process.exit(-1);
 }
 
-const file = fs.readFileSync(jekyllConfigFile, 'utf8');
-const jekyllConfig = yaml.parse(file);
+console.log("Project source: ", jekyll.config.source);
 
-console.log("Project source: ", jekyllConfig.source);
-
-var rootFolder = inputs + path.sep + jekyllConfig.source;
+var rootFolder = inputs + path.sep + jekyll.config.source;
 
 const builder = new (require('./lib/builder/language-builder'))(rootFolder, opts);
-processor.process(builder, rootFolder);
+processor.process(builder, rootFolder, builder.export.bind(builder));
 
 // builder.export();
 
