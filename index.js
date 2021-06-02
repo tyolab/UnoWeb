@@ -12,7 +12,7 @@ const engines = require('./lib/engines');
 
 var optsAvailable = {
     'dry-run': true,
-    'selectors': "h1, h2, h3, h4, h5, h6, div, a, p, span, li, button"
+    // 'selectors': "h1, h2, h3, h4, h5, h6, div, a, p, span, li, button"
 };
 
 var params = new Params(optsAvailable, false);
