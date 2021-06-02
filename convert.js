@@ -17,7 +17,7 @@ var optsAvailable = {
     'dry-run': true,
     'source': "client",
     'destination': 'public',
-    'from': {required: true},
+    'from': {required: true, nullable: false},
 };
 
 optsAvailable.to = '.' + path.sep + optsAvailable.source;
@@ -44,6 +44,9 @@ var inputs = opts["---"];
 const jekyll = engines.createJekyll(opts.to);
 
 jekyll.initializeConfig(opts);
+
+// create all the necessary folders
+jekyll.makeDirectories();
 
 //console.log("Project source: ", jekyllConfig.source);
 
