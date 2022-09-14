@@ -18,9 +18,11 @@ var optsAvailable = {
     'source': "client",
     'destination': 'public',
     'from': {required: true, nullable: false},
+    'engine': 'jekyll',
+    'page': 'home',
 };
 
-optsAvailable.to = '.' + path.sep + optsAvailable.source;
+// optsAvailable.to = '.' + path.sep + optsAvailable.source;
 
 var params = new Params(optsAvailable, false);
 
@@ -41,25 +43,22 @@ var inputs = opts["---"];
 /**
  * 
  */
-const jekyll = engines.createJekyll(opts.to);
+const engine = engines.create(opts.engine, opts.to);
 
-jekyll.initializeConfig(opts);
-
-// create all the necessary folders
-jekyll.makeDirectories();
+engine.initialize(opts);
 
 //console.log("Project source: ", jekyllConfig.source);
 
-var rootFolder = opts.to;
+var rootFolder = engine.target_directory;
 var targetFile = opts.from + path.sep + inputs;
-var templateFolder = path.resolve(__dirname, 'templates/jekyll');
+var templateFolder = path.resolve(__dirname, 'templates/' + opts.engine);
 
 const files = new (require('./lib/builder/files-builder'))(templateFolder, {
-    "target_dir": opts.to
+    "target_dir": engine.target_directory
 });
 processor.process(files, templateFolder, function() {
     const builder = new (require('./lib/builder/site-builder'))(rootFolder, opts);
-    builder.engine = jekyll;
+    builder.engine = engine;
     processor.process(builder, targetFile);
 });
 
