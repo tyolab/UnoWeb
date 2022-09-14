@@ -59,6 +59,7 @@ const files = new (require('./lib/builder/files-builder'))(templateFolder, {
 processor.process(files, templateFolder, function() {
     const builder = new (require('./lib/builder/site-builder'))(rootFolder, opts);
     builder.engine = engine;
+    builder.page = opts.page;
     processor.process(builder, targetFile);
 });
 
