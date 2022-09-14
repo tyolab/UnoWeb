@@ -1,21 +1,27 @@
+/**
+ * The index page for HOME
+ * 
+ */
 import {
   getSettings,
   getHero,
-  getAbout,
-  getFxSolutions,
+  getAbout
 } from "../lib/content";
 
-import Layout from "../components/Layout/Layout";
-import Hero from "../components/Hero/Hero";
-import About from "../components/About/About";
-import Contact from "../components/Contact/Contact";
-import Footer from "../components/Footer/Footer";
+import Layout from "../components/layout";
+
+/**
+ * SPA (Single Page Application) - Next.js
+ */
+import Hero from "../components/home/hero";
+import About from "../components/home/about";
+import Contact from "../components/home/contact";
+import Footer from "../components/common/footer";
 
 export default function Home({
   settings,
   hero,
-  about,
-  fxSolutions,
+  about
 }) {
   return (
     <Layout settings={settings}>
@@ -31,14 +37,12 @@ export async function getStaticProps() {
   const settings = await getSettings();
   const hero = await getHero();
   const about = await getAbout();
-  const fxsolutions = await getFxSolutions();
 
   return {
     props: {
       settings,
       hero,
-      about,
-      fxsolutions,
+      about
     }
   };
 }

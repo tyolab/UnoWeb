@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "../../styles/scss/layout.module.scss";
 
-import Nav from "../Nav/Nav";
+import Nav from "../common/nav";
 
 export default function Layout({ settings, children }) {
   return (

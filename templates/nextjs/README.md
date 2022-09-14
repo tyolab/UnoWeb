@@ -12,6 +12,9 @@ NextJs Components
 ## Content
 NextJs Content using Markdown
 
+- home
+   * section*.md
+
 ## Settings
 NextJs Settings using JSON
 
