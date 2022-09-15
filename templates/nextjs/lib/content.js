@@ -48,21 +48,10 @@ export async function getSettings(pageName) {
   return result;
 }
 
-export async function getServices() {
-  return await getJson("services.json");
-}
-
-// export async function getProjects() {
-//   return await getJson("projects.json");
-// }
-
-// export async function getVideos() {
-//   return await getJson("videos.json");
-// }
-
-
-export async function getFxSolutions() {
-  return getMarkdown("solutions.md");
+export async function getContentAndSettings(pageName, sectionName) {
+  const content = await getMarkdown(pageName + "/" + sectionName + ".md");
+  const settings = await getJson(pageName + "/" + sectionName + ".json");
+  return { content, settings };
 }
 
 export async function getHero() {
