@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
+import path from 'path';
 
 const contentDirectory = path.join(process.cwd(), "content");
 const settingsDirectory = path.join(process.cwd(), "settings");
@@ -17,6 +18,9 @@ const getJson = async (src) => {
 
 const getMarkdown = async (src) => {
   const fullPath = path.join(contentDirectory, src);
+  if (!fs.existsSync(fullPath))
+    return null;
+
   const fileContents = await fs.readFile(fullPath, "utf8");
 
   // Use gray-matter to parse the post metadata section
@@ -37,7 +41,10 @@ const getMarkdown = async (src) => {
 
 export async function getSettings(pageName) {
   pageName = pageName || "settings";
-  settingFile = pageName.replaceAll('|', '/') + ".json";
+  settingFile = pageName.replace(/|/g, path.sep) + ".json";
+  if (!fs.existsSync(settingFile))
+    return null;
+
   const result = await getJson(settingFile);
   const { theme, md, fontSize, images } = result.ogImage;
   result.ogImage = `https://og-image.now.sh/${encodeURI(

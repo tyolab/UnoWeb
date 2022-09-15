@@ -1,48 +1,7 @@
 /**
  * The index page for HOME
  * 
+ * Copy The Page Content here from the "PARTS" folder
+ * 
  */
-import {
-  getSettings,
-  getHero,
-  getAbout
-} from "../lib/content";
-
-import Layout from "../components/layout";
-
-/**
- * SPA (Single Page Application) - Next.js
- */
-import Hero from "../components/home/hero";
-import About from "../components/home/about";
-import Contact from "../components/home/contact";
-import Footer from "../components/common/footer";
-
-export default function Home({
-  settings,
-  hero,
-  about
-}) {
-  return (
-    <Layout settings={settings}>
-      {/* <Hero item={hero} />
-      <About item={about} /> */}
-      <Contact settings={settings} />
-      <Footer settings={settings} />
-    </Layout>
-  );
-}
-
-export async function getStaticProps() {
-  const settings = await getSettings();
-  const hero = await getHero();
-  const about = await getAbout();
-
-  return {
-    props: {
-      settings,
-      hero,
-      about
-    }
-  };
-}
+throw new Error('This is a template file and should not be executed. Copy the page (.js) from the part folder to here"');
