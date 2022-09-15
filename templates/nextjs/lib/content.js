@@ -3,7 +3,6 @@ import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
-import path from 'path';
 
 const contentDirectory = path.join(process.cwd(), "content");
 const settingsDirectory = path.join(process.cwd(), "settings");
@@ -39,9 +38,12 @@ const getMarkdown = async (src) => {
   };
 };
 
+export async function getSiteSettings() {
+  return await getSettings("settings");
+}
+
 export async function getSettings(pageName) {
-  pageName = pageName || "settings";
-  settingFile = pageName.replace(/|/g, path.sep) + ".json";
+  let settingFile = pageName.replace(/\|/g, path.sep) + ".json";
   if (!fs.existsSync(settingFile))
     return null;
 

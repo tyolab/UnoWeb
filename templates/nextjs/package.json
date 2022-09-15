@@ -19,7 +19,7 @@
     "graceful-fs": "^4.2.10",
     "gray-matter": "^4.0.3",
     "next": "^12.3.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7",
     "normalize.css": "^8.0.0",
     "remark": "^14.0.2",
     "remark-html": "^15.0.1"
