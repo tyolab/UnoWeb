@@ -11,8 +11,14 @@ const postsDirectory = path.join(contentDirectory, "posts");
 
 const getJson = async (src) => {
   const filePath = path.join(settingsDirectory, src);
+
+  if (!fs.existsSync(filePath)) {
+    console.debug("getSettings: " + settingFile + " does not exist");
+    return {};
+  }
+
   const data = await fs.readFile(filePath, "utf8");
-  return JSON.parse(data);
+  return JSON.parse(data || "{}");
 };
 
 const getMarkdown = async (src) => {
@@ -44,8 +50,6 @@ export async function getSiteSettings() {
 
 export async function getSettings(pageName) {
   let settingFile = pageName.replace(/\|/g, path.sep) + ".json";
-  if (!fs.existsSync(settingFile))
-    return null;
 
   const result = await getJson(settingFile);
   const { theme, md, fontSize, images } = result.ogImage;
@@ -54,7 +58,8 @@ export async function getSettings(pageName) {
   )}.png?theme=${theme}&md=${md}&fontSize=${fontSize}&images=${encodeURI(
     images
   )}`;
-  return result;
+  console.log("Json Result: " + result);
+  return result || {};
 }
 
 export async function getContentAndSettings(pageName, sectionName) {

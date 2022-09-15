@@ -1,0 +1,21 @@
+{
+    "name": "NextJS app starter",
+    "description": "Put your awesome description here",
+    "title": "A NextJS app starter built by Eric Tang @ TYO Lab",
+    "ogImage": {
+      "theme": "light",
+      "md": 0,
+      "fontSize": "75px",
+      "images": ""
+    },
+    "email": "",
+    "youtube": {
+      "username": "",
+      "uri": "https://www.youtube.com/channel/"
+    },
+    "twitter": {
+      "username": "",
+      "uri": "https://twitter.com/"
+    }
+  }
+  

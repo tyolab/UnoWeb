@@ -1,5 +1,5 @@
 import Head from "next/head";
-import styles from "../../styles/modules/layout.module.sass";
+// import styles from "../../styles/modules/layout.module.sass";
 
 import Nav from "../common/nav";
 
