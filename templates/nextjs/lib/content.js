@@ -1,3 +1,4 @@
+import cheerio from "cheerio";
 import fs from "fs-extra";
 import path from "path";
 import matter from "gray-matter";
@@ -21,6 +22,12 @@ const getJson = async (src) => {
   return JSON.parse(data || "{}");
 };
 
+/**
+ * Returning the major text content including title(s) of a markdown file
+ * 
+ * @param {*} src 
+ * @returns 
+ */
 const getMarkdown = async (src) => {
   const fullPath = path.join(contentDirectory, src);
   if (!fs.existsSync(fullPath))
@@ -36,12 +43,31 @@ const getMarkdown = async (src) => {
     .use(html)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
+  const $ = cheerio.load(contentHtml);
 
-  // Combine the data with the content
-  return {
-    contentHtml,
-    ...matterResult.data
-  };
+  // we only care headings and paragraphs in the markdown as it would be painful or unfriendly to edit text in other formats like YAML or JSON
+  const headings = $("h1, h2, h3, h4, h5, h6");
+  const paragraphs = $("p");
+  let results = {
+    h1: [],
+    h2: [],
+    h3: [],
+    h4: [],
+    h5: [],
+    h6: [],
+    p: [],
+    ...matterResult.data,
+  }
+
+  headings.each((i, el) => {
+    results[el.tagName.toLowerCase()].push($(el).text());
+  });
+
+  paragraphs.each((i, el) => {
+    results[el.tagName.toLowerCase()].push($(el).text());
+  });
+
+  return results;
 };
 
 export async function getSiteSettings() {

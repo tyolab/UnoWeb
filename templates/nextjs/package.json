@@ -22,7 +22,8 @@
     "node-sass": "^7",
     "normalize.css": "^8.0.0",
     "remark": "^14.0.2",
-    "remark-html": "^15.0.1"
+    "remark-html": "^15.0.1",
+    "cheerio": "^1.0.0-rc.10"
   },
   "devDependencies": {
     "autoprefixer": "^9.1.5",
