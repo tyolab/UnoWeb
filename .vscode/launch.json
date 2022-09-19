@@ -1,0 +1,43 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Lanuage Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["--dry-run", "false", 
+                // "--selectors",
+                // "h1, h2, h3, h4, h5, h6, div, a, p, span, li, button",
+                "/data/tyolab/clients/Andy/tradedoctor.net-web"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/convert.js",
+            "args": ["--dry-run", "true", 
+                "--from", "/data/tyolab/web/themes/appiya-html/html/",
+                // "--to", "/data/tyolab/clients/Andy/tradedoctor.net-web/client",
+                "--engine", "nextjs",
+                "index.html"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "remark2json",
+            "program": "${workspaceFolder}/test/remark2json.ts",
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "outFiles": ["${workspaceFolder}/out/**/*.js"]
+          }
+    ]
+}
