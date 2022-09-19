@@ -7,7 +7,6 @@
   },
   "items" : [
     {"href": "#", "label": "Home", "target": "_self"},
-    {"href": "#solutions", "label": "FX Solutions", "target": "_self"},    
     {"href": "#about", "label": "About", "target": "_self"},
     {"href": "#contact", "label": "Contact", "target": "_self"}
   ],

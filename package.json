@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "Build website statically and easily",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
