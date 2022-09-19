@@ -3,7 +3,7 @@ import cx from "classnames";
 
 export default function Container({ children, className, ...rest }) {
   return (
-    <div className={cx(styles.container, className)} {...rest}>
+    <div className={cx(/* styles.container,  */className)} {...rest}>
       {children}
     </div>
   );

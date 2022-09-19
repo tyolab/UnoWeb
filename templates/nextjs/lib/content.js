@@ -30,8 +30,10 @@ const getJson = async (src) => {
  */
 const getMarkdown = async (src) => {
   const fullPath = path.join(contentDirectory, src);
-  if (!fs.existsSync(fullPath))
+  if (!fs.existsSync(fullPath)) {
+    console.debug("getMarkdown: " + fullPath + " does not exist");
     return null;
+  }
 
   const fileContents = await fs.readFile(fullPath, "utf8");
 
@@ -70,21 +72,39 @@ const getMarkdown = async (src) => {
   return results;
 };
 
-export async function getSiteSettings() {
-  return await getSettings("settings");
+export async function getFooter() {
+  let content = await getMarkdown("footer.md");
+  let settings = await getSiteFooter();
+  return {
+    content: content,
+    settings: settings
+  };
 }
 
-export async function getSettings(pageName) {
-  let settingFile = pageName.replace(/\|/g, path.sep) + ".json";
+export async function getSiteFooter() {
+  return await getSettings("footer");
+}
 
-  const result = await getJson(settingFile);
+export async function getSiteMenu() {
+  return await getSettings("menu");
+}
+
+export async function getSiteSettings() {
+  let result = await getSettings("settings");
   const { theme, md, fontSize, images } = result.ogImage;
   result.ogImage = `https://og-image.now.sh/${encodeURI(
     result.title
   )}.png?theme=${theme}&md=${md}&fontSize=${fontSize}&images=${encodeURI(
     images
   )}`;
-  console.log("Json Result: " + result);
+  return result;
+}
+
+export async function getSettings(pageName) {
+  let settingFile = pageName.replace(/\|/g, path.sep) + ".json";
+
+  const result = await getJson(settingFile);
+  // console.log("Json Result: " + result);
   return result || {};
 }
 
