@@ -20,6 +20,7 @@ var optsAvailable = {
     'from': {required: true, nullable: false},
     'engine': 'jekyll',
     'page': 'home',
+    'strip_layout': true,
 };
 
 // optsAvailable.to = '.' + path.sep + optsAvailable.source;
