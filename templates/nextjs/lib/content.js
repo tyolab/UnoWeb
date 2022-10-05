@@ -14,7 +14,7 @@ const getJson = async (src) => {
   const filePath = path.join(settingsDirectory, src);
 
   if (!fs.existsSync(filePath)) {
-    console.debug("getSettings: " + settingFile + " does not exist");
+    console.debug("getSettings: " + filePath + " does not exist");
     return {};
   }
 
