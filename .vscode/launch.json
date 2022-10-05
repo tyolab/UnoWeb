@@ -26,9 +26,10 @@
             ],
             "program": "${workspaceFolder}/convert.js",
             "args": ["--dry-run", "true", 
-                "--from", "/data/tyolab/web/themes/appiya-html/html/",
-                // "--to", "/data/tyolab/clients/Andy/tradedoctor.net-web/client",
+                "--from", "/data/tyolab/clients/carry/contest/contest.cashbackrates.com/template/",
+                "--to", "/data/tyolab/clients/carry/contest/contest.cashbackrates.com/frontend",
                 "--engine", "nextjs",
+                "--strip_layout", "false",
                 "index.html"]
         },
         {

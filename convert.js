@@ -44,7 +44,7 @@ var inputs = opts["---"];
 /**
  * 
  */
-const engine = engines.create(opts.engine, opts.to);
+const engine = engines.create(opts.engine, opts.to, opts);
 
 engine.initialize(opts);
 
