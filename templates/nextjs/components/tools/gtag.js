@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+
 import { NEXT_PUBLIC_GTM_ID } from '../../lib/gtag';
 
 const gtagScript1 = `https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GTM_ID}`;
@@ -10,7 +12,7 @@ gtag('config', '${NEXT_PUBLIC_GTM_ID}');`;
 
 const gtagNoScript = `https://www.googletagmanager.com/ns.html?id=${NEXT_PUBLIC_GTM_ID}`;
 
-export function GTag (){
+export function GTag () {
     return (
         <>
           {/* <!-- Google tag (gtag.js) --> */}
@@ -20,10 +22,14 @@ export function GTag (){
     );
 };
 
+const style = {
+  display: "none",
+  visibility: "hidden"};
+  
 export function GTag_NoScript (){
   return (
       <>
-        <noscript><iframe src={gaScript2} height="0" width="0" style={style}></iframe></noscript>
+        <noscript><iframe src={gtagNoScript} height="0" width="0" style={style}></iframe></noscript>
       </>
   );
 }
