@@ -1,9 +1,10 @@
 import Head from "next/head";
-// import styles from "../../styles/modules/layout.module.sass";
+import styles from "../../styles/modules/layout.module.sass";
 
 import Nav from "../common/nav";
+import Footer from "../common/footer"
 
-export default function Layout({ settings, children }) {
+export default function Layout({ menu, footer, settings, children }) {
   return (
     <div className={styles.layout}>
       <Head>
@@ -67,7 +68,8 @@ export default function Layout({ settings, children }) {
           <Nav settings={settings} />
         </div>
       </header>
-      <main className={styles.main}>{children}</main>
+      {styles.main ? <main className={styles.main}>{children}</main> : {children}}
+      <Footer content={footer.content} styles={footer.settings.styles} settings={footer.settings} />
     </div>
   );
 }

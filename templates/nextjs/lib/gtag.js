@@ -1,11 +1,11 @@
-export const GTM_ID = process.env.GTM_ID || "GTM-N4KQD3G";
+export const NEXT_PUBLIC_GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-N4KQD3G";
 
 /** 
  * For GTAG
  */
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url) => {
-  window.gtag("config", GTM_ID, {
+  window.gtag("config", NEXT_PUBLIC_GTM_ID, {
     page_path: url
   });
 };
