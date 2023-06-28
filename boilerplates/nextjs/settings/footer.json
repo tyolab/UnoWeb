@@ -1,0 +1,40 @@
+{
+"links" : [
+    {"href": "#", "label": ""},
+    {"href": "#", "label": ""},    
+    {"href": "#", "label": ""},
+    {"href": "#", "label": ""}
+    ],
+    "social" : {
+    "facebook" : {"link": "#", "label": "", "icon": "assets/img/Facebook Icon.svg"},
+    "twitter" : {"link": "#", "label": "", "icon": "assets/img/Twitter Icon.svg"},
+    "telegram" : {"link": "#", "label": "", "icon": "assets/img/Telegram Icon.svg"},
+    "linkedin" : {"link": "#", "label": "", "icon": "assets/img/Linkedin Icon.svg"},
+    "youtube" : {"link": "#", "label": "", "icon": "assets/img/Youtube Icon.svg"},
+    "instagram" : {"link": "#", "label": "", "icon": "assets/img/Instagram Icon.svg"}
+    },
+    "headings": {
+    "about" : "About",
+    "find_us" : "Find Us",
+    "contact_us" : "Contact Us"
+    },
+    "hints": {
+    "email" : "Email",
+    "phone" : "Phone",
+    "address" : "Address",
+    "enter_your_name" : "Enter your name",
+    "enter_your_email" : "Enter your email"
+    },
+    "buttons": {
+    "submit": "Submit"
+    },
+    "logo": {
+    "href": "#",
+    "label": "Logo",
+    "image": ""
+    },    
+    "copyright": "2023 TYO Lab. All Rights Reserved.",
+    "style": {
+        "footer": ""
+    }
+}

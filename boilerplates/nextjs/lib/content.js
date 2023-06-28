@@ -10,16 +10,28 @@ const settingsDirectory = path.join(process.cwd(), "settings");
 
 const postsDirectory = path.join(contentDirectory, "posts");
 
-const getJson = async (src) => {
+const getSettingsJson = async (src) => {
   const filePath = path.join(settingsDirectory, src);
 
   if (!fs.existsSync(filePath)) {
-    console.debug("getSettings: " + filePath + " does not exist");
+    console.debug("getSettingsJson: " + filePath + " does not exist");
     return {};
   }
 
   const data = await fs.readFile(filePath, "utf8");
-  return JSON.parse(data || "{}");
+  return JSON.parse(data || {});
+};
+
+const getContentJson = async (src) => {
+  const filePath = path.join(contentDirectory, src);
+
+  if (!fs.existsSync(filePath)) {
+    console.debug("getContentJson: " + filePath + " does not exist");
+    return {};
+  }
+
+  const data = await fs.readFile(filePath, "utf8");
+  return JSON.parse(data || {});
 };
 
 /**
@@ -72,7 +84,19 @@ const getMarkdown = async (src) => {
   return results;
 };
 
+export async function getHeader(locale) {
+  let settings = await getSiteHeader(locale);
+  return {
+    settings: settings || { styles: {}}
+  };
+}
+
+export async function getSiteHeader(locale) {
+  return await getSettings("header", locale);
+}
+
 export async function getFooter() {
+  console.debug("get footer");
   let content = await getMarkdown("footer.md");
   let settings = await getSiteFooter();
   return {
@@ -90,6 +114,7 @@ export async function getSiteMenu() {
 }
 
 export async function getSiteSettings() {
+  console.debug("get site settings");
   let result = await getSettings("settings");
   const { theme, md, fontSize, images } = result.ogImage;
   result.ogImage = `https://og-image.now.sh/${encodeURI(
@@ -103,14 +128,17 @@ export async function getSiteSettings() {
 export async function getSettings(pageName) {
   let settingFile = pageName.replace(/\|/g, path.sep) + ".json";
 
-  const result = await getJson(settingFile);
+  const result = await getSettingsJson(settingFile);
   // console.log("Json Result: " + result);
   return result || {};
 }
 
 export async function getContentAndSettings(pageName, sectionName) {
-  const content = await getMarkdown(pageName + "/" + sectionName + ".md");
-  const settings = await getJson(pageName + "/" + sectionName + ".json");
+  console.debug("get content and settings: " + pageName + "/" + sectionName);
+  const markdown = await getMarkdown(pageName + "/" + sectionName + ".md");
+  const settings = await getSettingsJson(pageName + "/" + sectionName + ".json");
+  const smallText = await getContentJson(pageName + "/" + sectionName + ".json");
+  const content = { ...markdown, ...smallText };
   return { content, settings };
 }
 

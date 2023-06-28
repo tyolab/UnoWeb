@@ -26,11 +26,11 @@
             ],
             "program": "${workspaceFolder}/convert.js",
             "args": ["--dry-run", "true", 
-                "--from", "/data/tyolab/clients/carry/contest/contest.cashbackrates.com/template/",
-                "--to", "/data/tyolab/clients/carry/contest/contest.cashbackrates.com/frontend",
+                "--from", "/data/tyolab/web/themes/megakit/template/",
+                "--to", "/data/tyolab/clients/Andy/websites/jyglobal2/",
                 "--engine", "nextjs",
                 "--strip_layout", "false",
-                "index.html"]
+                "contact.html"]
         },
         {
             "type": "node",

@@ -18,7 +18,7 @@ export default function Footer({ content, styles, settings }) {
                         <p className="ml-auto" key={i}>{p}</p>
                       ))}
                       <div className="social-network text-center">
-                         {settings.links.map((link, i) => (
+                         {settings.links && settings.links.map((link, i) => (
                           <a href={link.href} key={i}>{link.label}</a>
                          ))}
                      </div>

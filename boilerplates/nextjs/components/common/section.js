@@ -1,5 +1,5 @@
 import cx from "classnames";
-// import styles from "../../styles/modules/section.module.sass";
+import styles from "../../styles/modules/section.module.sass";
 
 export default function Section({ children, className, ...rest }) {
   return (

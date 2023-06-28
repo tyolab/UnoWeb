@@ -21,6 +21,8 @@ var optsAvailable = {
     'engine': 'jekyll',
     'page': 'home',
     'strip_layout': true,
+    'mode': 'xml', // could be xml, html, text,
+    'overwrite': false,
 };
 
 // optsAvailable.to = '.' + path.sep + optsAvailable.source;
@@ -52,7 +54,7 @@ engine.initialize(opts);
 
 var rootFolder = engine.target_directory;
 var targetFile = opts.from + path.sep + inputs;
-var templateFolder = path.resolve(__dirname, 'templates/' + opts.engine);
+var templateFolder = path.resolve(__dirname, 'boilerplates/' + opts.engine);
 
 const files = new (require('./lib/builder/files-builder'))(templateFolder, {
     "target_dir": engine.target_directory
