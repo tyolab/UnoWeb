@@ -33,17 +33,19 @@ let config_webpack4 =  (config, { buildId, dev, isServer, defaultLoaders, nextRu
 
 
 let configuration = {
-    i18n: {
-        /**
-         * Provide the locales you want to support in your application
-         */
-        locales: ["en"/* , "zh" */],
-        /**
-         * This is the default locale you want to be used when visiting
-         * a non-locale prefixed path.
-         */
-        defaultLocale: "en",
-      },
+    // i18n support is not compatible with next export
+    // uncomment the following lines if you want to use i18n and with dynamic pages
+    // i18n: {
+    //     /**
+    //      * Provide the locales you want to support in your application
+    //      */
+    //     locales: ["en"/* , "zh" */],
+    //     /**
+    //      * This is the default locale you want to be used when visiting
+    //      * a non-locale prefixed path.
+    //      */
+    //     defaultLocale: "en",
+    //   },
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],
     },

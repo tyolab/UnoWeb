@@ -30,7 +30,8 @@
                 "--to", "/data/tyolab/clients/Andy/websites/jyglobal2/",
                 "--engine", "nextjs",
                 "--strip_layout", "false",
-                "contact.html"]
+                "--page", "blog",
+                "blog-sidebar.html"]
         },
         {
             "type": "node",
