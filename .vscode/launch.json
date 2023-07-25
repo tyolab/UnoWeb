@@ -26,12 +26,13 @@
             ],
             "program": "${workspaceFolder}/convert.js",
             "args": ["--dry-run", "true", 
-                "--from", "/data/tyolab/web/themes/megakit/template/",
-                "--to", "/data/tyolab/clients/Andy/websites/jyglobal2/",
+                "--from", "/data/tyolab/web/themes/eden-template/template",
+                "--to", "/data/tyolab/clients/allen/website",
                 "--engine", "nextjs",
                 "--strip_layout", "false",
-                "--page", "blog",
-                "blog-sidebar.html"]
+                "--page", "home",
+                "--overwrite", "true",
+                "index.html"]
         },
         {
             "type": "node",

@@ -54,7 +54,8 @@ let configuration = {
     // experimental: {
     images: {
         unoptimized: true
-    }
+    },
+    trailingSlash: true,
     // }
 }
 module.exports = configuration

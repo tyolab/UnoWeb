@@ -23,7 +23,7 @@ const getScripts = () => {
   </>);
 }
 
-export default function Layout({ menu, header, footer, settings, children }) {
+export default function Layout({ menu, header, footer, settings, scripts = [], children }) {
   // console.debug("Children: ", children);
   return (
     <>
@@ -88,8 +88,7 @@ export default function Layout({ menu, header, footer, settings, children }) {
           <Nav settings={settings} />
         </div>
       </header> */}
-      <body>
-      <Header className={styles.header} content={header.content} styles={header.settings.styles} settings={header.settings}>
+      <Header menu={menu} className={styles.header} content={header.content} styles={header.settings.styles} settings={header.settings}>
       </Header>
       
       <div className={cx(styles.main, "main-wrapper")}>
@@ -97,7 +96,6 @@ export default function Layout({ menu, header, footer, settings, children }) {
 
         <Footer content={footer.content} styles={footer.settings.styles} settings={footer.settings} />
       </div>
-      </body>
       {getScripts()}
     </>
   );

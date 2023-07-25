@@ -14,7 +14,9 @@ export default class MyDocument extends Document {
         </Head>
 
           <GTag_NoScript />
+          <body>
           <Main />
+          </body>
           <NextScript />
 
       </Html>

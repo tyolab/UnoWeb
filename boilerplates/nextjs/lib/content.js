@@ -19,7 +19,13 @@ const getSettingsJson = async (src) => {
   }
 
   const data = await fs.readFile(filePath, "utf8");
-  return JSON.parse(data || {});
+  try {
+    return JSON.parse(data || '{}');
+  }
+  catch (e) {
+    console.debug("getSettingsJson: " + filePath + " is not a valid JSON file");
+    return {};
+  }
 };
 
 const getContentJson = async (src) => {
@@ -31,7 +37,13 @@ const getContentJson = async (src) => {
   }
 
   const data = await fs.readFile(filePath, "utf8");
-  return JSON.parse(data || {});
+  try {
+    return JSON.parse(data || '{}');
+  }
+  catch (e) {
+    console.debug("getContentJson: " + filePath + " is not a valid JSON file");
+    return {};
+  }
 };
 
 /**
