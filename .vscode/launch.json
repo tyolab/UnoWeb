@@ -20,19 +20,19 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Convert Template",
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/convert.js",
             "args": ["--dry-run", "true", 
-                "--from", "/data/tyolab/web/themes/eden-template/template",
-                "--to", "/data/tyolab/clients/allen/website",
+                "--from", "/data/tyolab/web/themes/agico-v2/template/",
+                "--to", "/data/tyolab/web/tyolab/www.tyolab.com",
                 "--engine", "nextjs",
                 "--strip_layout", "false",
-                "--page", "home",
+                "--page", "blog",
                 "--overwrite", "true",
-                "index.html"]
+                "blog.html"]
         },
         {
             "type": "node",

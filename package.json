@@ -2,18 +2,23 @@
   "name": "unoweb",
   "version": "0.0.1",
   "description": "Build website statically and easily",
+  "keywords": [
+    "Template",
+    "Website"
+  ],
   "main": "index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Eric Tang @TYO Lab",
+  "license": "MIT",
   "dependencies": {
     "async": "^3.2.0",
     "bunyan": "^1.8.12",
     "cheerio": "^1.0.0-rc.3",
     "fs-extra": "^10.1.0",
+    "handlebars": "^4.7.8",
     "node-programmer": "^0.0.23",
     "remark-parse": "^10.0.1",
     "tyo-utils": "0.0.4",

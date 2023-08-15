@@ -1,0 +1,21 @@
+import { useState } from "react";
+
+import cx from "classnames";      
+
+import styles from "../../styles/modules/nav.module.sass";    
+export default function Nav({ items, styles, settings, logo }) {
+    logo = logo || {};
+    const [open, setOpen] = useState(false);
+  
+    const handleMenuClick = () => {
+      setOpen(!open);
+    };
+  
+    const handleItemClick = () => {
+      setOpen(!open);
+    }
+
+    return (
+        {{navStr}}
+    );
+}
