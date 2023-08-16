@@ -23,6 +23,7 @@ var optsAvailable = {
     'strip_layout': true,
     'mode': 'xml', // could be xml, html, text,
     'overwrite': false,
+    'section': "",
 };
 
 // optsAvailable.to = '.' + path.sep + optsAvailable.source;
@@ -31,6 +32,9 @@ var params = new Params(optsAvailable, false);
 
 var opts = params.getOpts();
 var optCount = params.getOptCount();
+
+opts.sections = opts.section.split(",");
+delete opts.section;
 
 const processor = new (require('./processor'))();
 
