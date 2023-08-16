@@ -29,7 +29,7 @@
                 "--from", "/data/tyolab/web/themes/agico-v2/template/",
                 "--to", "/data/tyolab/web/tyolab/www.tyolab.com",
                 "--engine", "nextjs",
-                "--strip_layout", "false",
+                "--strip_layout", "true",
                 "--page", "blog",
                 "--overwrite", "true",
                 "blog.html"]

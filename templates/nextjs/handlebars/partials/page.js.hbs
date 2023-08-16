@@ -2,3 +2,53 @@ import { getContentAndSettings, getSiteMenu, getSiteSettings, getFooter, getHead
 
 import Layout from '../components/layout';
 
+{{#each sections}}
+import {{section_name}} from '../components/{{page_name}}/{{section_variable}}';
+{{/each}}
+
+import Footer from "../components/common/footer";
+export default function {{!--  --}} {{page_class}} ({
+        menu,
+        header,
+        footer,
+        settings,
+        {{!-- ${sectionNames.map((section) => {
+            return section[1] + '\n\t\t\t\t';
+        })
+        } --}}
+        {{#each sections}}
+        {{section_name}},
+        {{/each}}
+}) {
+    return (
+        <Layout menu={menu} settings={settings} footer={footer} header={header} >
+            {{#each sections}}
+            <{{section_name}} id="{{section_id}}" content={ {{section_id}}.content } settings={ {{section_id}}.settings } />
+            {{/each}}
+        </Layout>
+    );
+}
+
+export async function getStaticProps({ locale }) {
+    const menu = await getSiteMenu();
+    console.debug("menu: ", menu);
+    const footer = await getFooter();
+
+    const settings = await getSiteSettings();
+
+    {{#each sections}}
+    const {{section_id}} = await getContentAndSettings('{{page_name}}', '{{section_id}}');
+    {{/each}}
+  
+    return {
+      props: {
+        menu,
+        settings,
+        {{!-- ${sectionNames.map((section) => section[1] + '\n\t\t\t\t')}, --}}
+        {{#each sections}}
+        {{section_id}},
+        {{/each}}
+        footer,
+      }
+    };
+  }

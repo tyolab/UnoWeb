@@ -1,0 +1,15 @@
+
+import module_styles from "../../styles/modules/footer.module.sass";
+
+import cx from "classnames"; 
+
+export default function Footer({ content, styles, settings }) {
+    styles = styles || {};
+    settings = settings || {};
+    content = content || {}; 
+    return (
+        <footer id="footer" className={cx(module_styles.footer, styles.footer)}>
+            {{{html}}}
+        </footer>
+    );
+}     

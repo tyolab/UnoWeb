@@ -1,0 +1,11 @@
+import cx from "classnames";
+import styles from "../../styles/modules/Header.module.sass";
+
+export default function Header({ children, className, ...rest }) {
+    return (
+    <header className={cx(className)} {...rest}>
+        {{{html}}}
+        {children}
+    </header>
+    );
+}
