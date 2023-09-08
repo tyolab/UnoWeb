@@ -44,4 +44,13 @@ Helpers.prototype.splitParagraphs = (p) => {
 	return [p1, p2];
 }
 
+Helpers.prototype.getScripts = (scripts) => {
+	return (<>
+	  {scripts.map((script, index) => {
+		return (<script key={index} src={`js/${script}`} ></script>);
+		// return (<Script src={`js/${script}`} />);
+	  })}
+	</>);
+}
+
 export default new Helpers();

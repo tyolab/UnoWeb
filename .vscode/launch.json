@@ -27,13 +27,13 @@
             "program": "${workspaceFolder}/convert.js",
             "args": ["--dry-run", "true", 
                 "--from", "/data/tyolab/web/themes/agico-v2/template/",
-                "--to", "/data/tyolab/web/tyolab/www.tyolab.com",
+                "--to", "/data/tyolab/web/tyolab/tyo.com.au",
                 "--engine", "nextjs",
-                "--strip_layout", "true",
-                "--page", "blog",
-                "--overwrite", "true",
-                "--section", "navigation,blog-list,newsleter",
-                "blog.html"]
+                "--strip_layout", "false",
+                "--page", "services",
+                "--overwrite", "false",
+                "--section", "banner,overview,features,subscription,footer,copyright",
+                "services.html"]
         },
         {
             "type": "node",

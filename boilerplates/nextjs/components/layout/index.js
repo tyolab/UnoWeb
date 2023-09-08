@@ -6,8 +6,6 @@ import styles from "../../styles/modules/layout.module.sass";
 import Footer from "../common/footer"
 import Header from "../common/header"
 
-import { GTag, GTag_NoScript } from '../components/tools/gtag';
-
 const scripts = [
       "https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js", 
       "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js",
