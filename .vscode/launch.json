@@ -26,14 +26,54 @@
             ],
             "program": "${workspaceFolder}/convert.js",
             "args": ["--dry-run", "true", 
-                "--from", "/data/tyolab/web/themes/agico-v2/template/",
-                "--to", "/data/tyolab/web/tyolab/tyo.com.au",
+                // "--from", "/data/tyolab/web/themes/agico-v2/template/",
+                "--from", "/data2/tyolab/web/themes/elite-shop-premium/template",
+                "--to", "/data2/tyolab/web/shop/shoes-ecommerce/shop-frontend",
+                // "--to", "/data/tyolab/web/tyolab/store.tyo.com.au",
+                // "--from", "/data/tyolab/web/themes-html/azir/HTML/app/",
+                // "--to", "//data/tyolab/clients/Andy/meta-agent/",
                 "--engine", "nextjs",
                 "--strip_layout", "false",
-                "--page", "services",
+                // "--page", "contact",
+                // "--page", "about",
+                // "--page", "services",
+                // "--page", "features",
+                // "--page", "home",
+                // "--page", "confirmation",
+                // "--page", "myaccount",
+                // "--page", "checkout",
+                // "--page", "cart",
+                // "--page", "payment",
+                // "--page", "login",
+                // "--page", "signup",
+                // "--page", "order",
+                // "--page", "forget-password",
+                // "--page", "address",
+                // "--page", "dashboard",
+                // "--page", "profile",
                 "--overwrite", "false",
-                "--section", "banner,overview,features,subscription,footer,copyright",
-                "services.html"]
+                // "--section", "navigation,keepintouch,contactus,subscription,footer,copyright",
+                // "--section", "navigation,services,features,subscription",
+                // "--section", "navigation,map,message,footer",
+                // "--section", "navigation,hero,categories,promotion,collection,deal,instagram,service,newsletter,footer",
+                // "--section", "signup-form,footer",
+                // "--section", "address-info,footer",
+                // "--section", "overview,footer",
+                // "--section", "profile-details,footer",
+                "--section", "navigation,hero,about,service,team,faq,footer",
+                // "contact.html"
+                // "about.html"
+                // "services.html"
+                // "signin.html"
+                // "index.html",
+                // "dashboard.html"
+                // "payment.html",
+                // "login.html"
+                // "signup.html"
+                // "forget-password.html"
+                // "address.html"
+                "profile-details.html"
+            ]
         },
         {
             "type": "node",

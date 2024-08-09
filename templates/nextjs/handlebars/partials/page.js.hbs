@@ -1,4 +1,4 @@
-import { getContentAndSettings, getSiteMenu, getSiteSettings, getFooter, getHeader } from '../lib/content';
+import { getContentAndSettings, getSiteMenu, getSiteSettings, getFooter, getHeader, getPosts, getSEO } from '../lib/content';
 
 import Layout from '../components/layout';
 
@@ -12,6 +12,7 @@ export default function {{!--  --}} {{page_class}} ({
         header,
         footer,
         settings,
+        seo,
         {{!-- ${sectionNames.map((section) => {
             return section[1] + '\n\t\t\t\t';
         })
@@ -21,9 +22,9 @@ export default function {{!--  --}} {{page_class}} ({
         {{/each}}
 }) {
     return (
-        <Layout menu={menu} settings={settings} footer={footer} header={header} >
+        <Layout menu={menu} settings={settings} footer={footer} header={header} seo={seo} >
             {{#each sections}}
-            <{{section_name}} id="{{section_id}}" content={ {{section_id}}.content } settings={ {{section_id}}.settings } />
+            <{{section_name}} id="{{section_id}}" content={ {{section_id}}.content } settings={ {{section_id}}.settings }  seo={seo}  />
             {{/each}}
         </Layout>
     );
@@ -36,6 +37,8 @@ export async function getStaticProps({ locale }) {
 
     const settings = await getSiteSettings();
 
+    const seo = await getSEO();
+
     {{#each sections}}
     const {{section_id}} = await getContentAndSettings('{{page_name}}', '{{section_id}}');
     {{/each}}
@@ -44,6 +47,8 @@ export async function getStaticProps({ locale }) {
       props: {
         menu,
         settings,
+        seo,
+
         {{!-- ${sectionNames.map((section) => section[1] + '\n\t\t\t\t')}, --}}
         {{#each sections}}
         {{section_id}},

@@ -46,9 +46,8 @@ Helpers.prototype.splitParagraphs = (p) => {
 
 Helpers.prototype.getScripts = (scripts) => {
 	return (<>
-	  {scripts.map((script, index) => {
-		return (<script key={index} src={`js/${script}`} ></script>);
-		// return (<Script src={`js/${script}`} />);
+	  {scripts && scripts.map((script, index) => {
+		return (<script key={index} src={`${script}`} ></script>);
 	  })}
 	</>);
 }

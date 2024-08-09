@@ -33,7 +33,7 @@ var params = new Params(optsAvailable, false);
 var opts = params.getOpts();
 var optCount = params.getOptCount();
 
-opts.sections = opts.section.split(",");
+opts.sections = opts.section && opts.section.split(",") || [];
 delete opts.section;
 
 const processor = new (require('./processor'))();

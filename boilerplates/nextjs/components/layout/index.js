@@ -6,35 +6,25 @@ import styles from "../../styles/modules/layout.module.sass";
 import Footer from "../common/footer"
 import Header from "../common/header"
 
-const scripts = [
-      "https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js", 
-      "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js",
-      "assets/js/global.js"
-];
+import helpers from "lib/helpers";
+import constants from "lib/constants";
 
-const getScripts = () => {
-  return (<>
-    {scripts.map((script) => {
-      return (<script src={`${script}`} ></script>);
-      // return (<Script src={`js/${script}`} />);
-    })}
-  </>);
-}
-
-export default function Layout({ menu, header, footer, settings, scripts = [], children }) {
+export default function Layout({ menu, header, footer, settings, scripts = [], seo = {}, children }) {
   // console.debug("Children: ", children);
+  header = header || {settings: {styles: {}}}
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <title>{settings.title}</title>
+        <title>{seo.title || settings.title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta content="yes" name="apple-mobile-web-app-capable" />
-        <meta name="description" content={settings.description} />
-        <meta property="og:image" content={settings.ogImage} />
-        <meta name="og:title" content={settings.title} />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="description" content={seo.description || settings.description} />
+        <meta name="keywords" content={seo.keywords || settings.keywords} />
+        <meta property="og:image" content={seo.ogImage || settings.ogImage} />
+        <meta name="og:title" content={seo.title || settings.title} />
+        <meta name="twitter:card" content="/images/logo/tyo-card.png" />
         <meta
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
@@ -94,7 +84,7 @@ export default function Layout({ menu, header, footer, settings, scripts = [], c
 
         <Footer content={footer.content} styles={footer.settings.styles} settings={footer.settings} />
       </div>
-      {getScripts()}
+      {helpers.getScripts(constants.scripts.common, scripts)}
     </>
   );
 }

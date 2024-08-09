@@ -1,4 +1,4 @@
-export const NEXT_PUBLIC_GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-N4KQD3G";
+export const NEXT_PUBLIC_GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "G-9MWSKJECC6";
 
 /** 
  * For GTAG
