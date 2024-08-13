@@ -51,6 +51,7 @@
                 // "--page", "address",
                 // "--page", "dashboard",
                 // "--page", "profile",
+                "--page", "product",
                 "--overwrite", "false",
                 // "--section", "navigation,keepintouch,contactus,subscription,footer,copyright",
                 // "--section", "navigation,services,features,subscription",
@@ -60,7 +61,7 @@
                 // "--section", "address-info,footer",
                 // "--section", "overview,footer",
                 // "--section", "profile-details,footer",
-                "--section", "navigation,hero,about,service,team,faq,footer",
+                "--section", "product-details,testimonial,related-product,footer",
                 // "contact.html"
                 // "about.html"
                 // "services.html"
@@ -72,7 +73,7 @@
                 // "signup.html"
                 // "forget-password.html"
                 // "address.html"
-                "profile-details.html"
+                "product-single.html"
             ]
         },
         {

@@ -1,12 +1,12 @@
-import { getContentAndSettings, getSiteMenu, getSiteSettings, getFooter, getHeader, getPosts, getSEO } from '../lib/content';
+import { getContentAndSettings, getSiteMenu, getSiteSettings, getFooter, getHeader, getPosts, getSEO } from '@/lib/content';
 
-import Layout from '../components/layout';
+import Layout from '@/components/layout';
 
 {{#each sections}}
-import {{section_name}} from '../components/{{page_name}}/{{section_variable}}';
+import {{section_name}} from '@/components/{{page_name}}/{{section_variable}}';
 {{/each}}
 
-import Footer from "../components/common/footer";
+{{!-- import Footer from "../components/common/footer"; --}}
 export default function {{!--  --}} {{page_class}} ({
         menu,
         header,

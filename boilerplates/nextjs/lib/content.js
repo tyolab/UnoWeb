@@ -8,12 +8,19 @@ import { serialize } from 'next-mdx-remote/serialize'
 
 import { remark } from "remark";
 import rehypeStringify from 'rehype-stringify'
+import rehypeHighlight from 'rehype-highlight';
+
 import remarkGfm from 'remark-gfm'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 // import {read} from 'to-vfile'
 import {unified} from 'unified'
 import html from "remark-html";
+
+import { visit } from 'unist-util-visit'
+
+import rehypePrism from 'rehype-prism-plus'
+import rehypeCodeTitles from 'rehype-code-titles'
 
 import { preProcess, postProcess } from "./rehype-pre-raw";
 
@@ -26,7 +33,7 @@ const getSettingsJson = async (src) => {
   const filePath = path.join(settingsDirectory, src);
 
   if (!fs.existsSync(filePath)) {
-    console.debug("getSettingsJson: " + filePath + " does not exist");
+    console.log("getSettingsJson: " + filePath + " does not exist");
     return {};
   }
 
@@ -35,7 +42,7 @@ const getSettingsJson = async (src) => {
     return JSON.parse(data || '{}');
   }
   catch (e) {
-    console.debug("getSettingsJson: " + filePath + " is not a valid JSON file");
+    console.log("getSettingsJson: " + filePath + " is not a valid JSON file");
     return {};
   }
 };
@@ -44,7 +51,7 @@ const getContentJson = async (src) => {
   const filePath = path.join(contentDirectory, src);
 
   if (!fs.existsSync(filePath)) {
-    console.debug("getContentJson: " + filePath + " does not exist");
+    console.log("getContentJson: " + filePath + " does not exist");
     return {};
   }
 
@@ -53,7 +60,7 @@ const getContentJson = async (src) => {
     return JSON.parse(data || '{}');
   }
   catch (e) {
-    console.debug("getContentJson: " + filePath + " is not a valid JSON file");
+    console.log("getContentJson: " + filePath + " is not a valid JSON file");
     return {};
   }
 };
@@ -67,7 +74,7 @@ const getContentJson = async (src) => {
 const getMarkdown = async (src) => {
   const fullPath = path.join(contentDirectory, src);
   if (!fs.existsSync(fullPath)) {
-    console.debug("getMarkdown: " + fullPath + " does not exist");
+    console.log("getMarkdown: " + fullPath + " does not exist");
     return null;
   }
 
@@ -77,16 +84,16 @@ const getMarkdown = async (src) => {
   const matterResult = matter(fileContents);
 
   // Use remark to convert markdown into HTML string
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  // const processedContent = await unified()
-  //       .use(html)
-  //       .use(remarkParse)
-  //       .use(remarkGfm)
-  //       .use(remarkRehype)
-  //       .use(rehypeStringify)
-  //       .process(matterResult.content);
+  // const processedContent = await remark()
+  //   .use(html)
+  //   .process(matterResult.content);
+  const processedContent = await unified()
+        .use(html)
+        .use(remarkParse)
+        .use(remarkGfm)
+        .use(remarkRehype)
+        .use(rehypeStringify)
+        .process(matterResult.content);
 
   const contentHtml = processedContent.toString();
   const $ = cheerio.load(contentHtml);
@@ -116,6 +123,13 @@ const getMarkdown = async (src) => {
   return results;
 };
 
+export async function getSEO(pageName) {
+  let srcDir = pageName ? pageName + "/": "";
+  console.log("get content and settings: " + srcDir);
+  const smallText = await getContentJson(path.join(srcDir, "seo.json"));
+  return smallText;
+}
+
 export async function getHeader(locale) {
   let settings = await getSiteHeader(locale);
   return {
@@ -128,13 +142,15 @@ export async function getSiteHeader(locale) {
 }
 
 export async function getFooter() {
-  console.debug("get footer");
-  let content = await getMarkdown("footer.mdx");
-  let settings = await getSiteFooter();
-  return {
-    content: content,
-    settings: settings
-  };
+  // let content = await getMarkdown("footer.mdx");
+  // let settings = await getSiteFooter();
+  // return {
+  //   content: content,
+  //   settings: settings
+  // };
+  let ret = await getContentAndSettings(null, "footer");
+  console.log("get footer", ret);
+  return ret;
 }
 
 export async function getSiteFooter() {
@@ -146,7 +162,7 @@ export async function getSiteMenu() {
 }
 
 export async function getSiteSettings() {
-  console.debug("get site settings");
+  console.log("get site settings");
   let result = await getSettings("settings");
   const { theme, md, fontSize, images } = result.ogImage;
   result.ogImage = `https://og-image.now.sh/${encodeURI(
@@ -166,10 +182,11 @@ export async function getSettings(pageName) {
 }
 
 export async function getContentAndSettings(pageName, sectionName) {
-  console.debug("get content and settings: " + pageName + "/" + sectionName);
-  const markdown = await getMarkdown(pageName + "/" + sectionName + ".mdx");
-  const settings = await getSettingsJson(pageName + "/" + sectionName + ".json");
-  const smallText = await getContentJson(pageName + "/" + sectionName + ".json");
+  let srcDir = pageName ? pageName + "/" + sectionName : sectionName;
+  console.log("get content and settings: " + srcDir);
+  const markdown = await getMarkdown(srcDir + ".mdx");
+  const settings = await getSettingsJson(srcDir + ".json");
+  const smallText = await getContentJson(srcDir + ".json");
   const content = { ...markdown, ...smallText };
   return { content, settings };
 }
@@ -223,27 +240,61 @@ export async function getPostIds() {
 
 export async function buildPostWithMdxRemote(source) {
   return await serialize(source, {
-    // mdxOptions: {
-    //   rehypePlugins: [
-    //     preProcess,
-    //     // rehypeCodeTitles,
-    //     // rehypePrism,
+    mdxOptions: {
+      remarkPlugins: [],
+      rehypePlugins: [
+        () => (tree) => {
+          visit(tree, (node) => {
+            if (node?.type === "element" && node?.tagName === "pre") {
+              const [codeEl] = node.children;
+     
+              if (codeEl.tagName !== "code") return;
+     
+              node.raw = codeEl.children?.[0].value;
+            }
+          });
+        },
+      //   preProcess,
+      rehypeHighlight,
+      rehypeCodeTitles,
+      rehypePrism,
     //     // rehypeBlockquote,
-    //     postProcess,
-    //   ],
-    // },
+        // postProcess,
+        () => (tree) => {
+          visit(tree, (node) => {
+            if (node?.type === 'element' && node?.tagName === 'pre') {
+              node.properties['raw'] = node.raw
+              console.log(node) // here to see if you're getting the raw text
+            }
+
+            if (node?.type === "element" && node?.tagName === "div") {
+              // if (!("data-rehype-pretty-code-fragment" in node.properties)) {
+              //   return;
+              // }
+     
+              for (const child of node.children) {
+                if (child.tagName === "pre") {
+                  child.properties["raw"] = node.raw;
+                }
+              }
+            }
+          });
+        },
+      ],
+    },
     // ...
    }
   );
 }
 
 export async function buildPost(source) {
+  console.log("build post with mdx remote");
   return await buildPostWithMdxRemote(source);
 }
 
 export async function getPosts() {
   const fileNames = fs.readdirSync(postsDirectory);
-  console.debug("get post count: " + fileNames.length);
+  console.log("get post count: " + fileNames.length);
   const items = [];
 
   for (const fileName of fileNames) {
