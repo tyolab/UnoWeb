@@ -39,7 +39,7 @@
                 // "--page", "services",
                 // "--page", "features",
                 // "--page", "home",
-                // "--page", "confirmation",
+                "--page", "confirmation",
                 // "--page", "myaccount",
                 // "--page", "checkout",
                 // "--page", "cart",
@@ -53,7 +53,7 @@
                 // "--page", "profile",
                 // "--page", "product",
                 // "--page", "product-single",
-                "--page", "review",
+                // "--page", "review",
                 "--overwrite", "false",
                 // "--section", "navigation,keepintouch,contactus,subscription,footer,copyright",
                 // "--section", "navigation,services,features,subscription",
@@ -64,7 +64,7 @@
                 // "--section", "overview,footer",
                 // "--section", "profile-details,footer",
                 // "--section", "product-details,testimonial,related-product,footer",
-                "--section", "overview,footer",
+                "--section", "order,footer",
                 // "contact.html"
                 // "about.html"
                 // "services.html"
@@ -78,7 +78,7 @@
                 // "address.html"
                 // "product-single.html"
                 // "shipping.html"
-                "review.html"
+                "confirmation.html"
             ]
         },
         {
