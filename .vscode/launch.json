@@ -39,7 +39,7 @@
                 // "--page", "services",
                 // "--page", "features",
                 // "--page", "home",
-                "--page", "confirmation",
+                "--page", "account",
                 // "--page", "myaccount",
                 // "--page", "checkout",
                 // "--page", "cart",
@@ -64,7 +64,7 @@
                 // "--section", "overview,footer",
                 // "--section", "profile-details,footer",
                 // "--section", "product-details,testimonial,related-product,footer",
-                "--section", "order,footer",
+                "--section", "forgot-password",
                 // "contact.html"
                 // "about.html"
                 // "services.html"
@@ -78,7 +78,7 @@
                 // "address.html"
                 // "product-single.html"
                 // "shipping.html"
-                "confirmation.html"
+                "forget-password.html"
             ]
         },
         {

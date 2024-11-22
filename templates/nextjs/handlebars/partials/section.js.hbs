@@ -1,13 +1,13 @@
 import cx from "classnames";            
-import Styles from "@/styles/{{page_name}}/{{section_variable}}.module.sass";
+import moduleStyles from "@/styles/{{page_name}}/{{section_variable}}.module.sass";
 import Section from "../common/section";
 import Container from "../common/container";
 export default function ({ content, settings, children, className, ...rest }) {
     settings = settings || {};
     let styles = settings.styles || {};
     return (
-        <Section className={cx(styles.section, className, settings.styles.section)} {...rest}>
-            <Container className={cx(settings.styles.container)}>
+        <Section className={cx(moduleStyles.section, className, styles.section)} {...rest}>
+            <Container className={cx(styles.container)}>
                 {{{html}}}
             </Container>
         </Section>
