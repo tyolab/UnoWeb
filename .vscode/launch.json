@@ -26,20 +26,22 @@
             ],
             "program": "${workspaceFolder}/convert.js",
             "args": ["--dry-run", "true", 
-                // "--from", "/data/tyolab/web/themes/agico-v2/template/",
-                "--from", "/data2/tyolab/web/themes/elite-shop-premium/template",
-                "--to", "/data2/tyolab/web/shop/shoes-ecommerce/shop-frontend",
+                "--from", "/data/tyolab/web/themes/agico-v2/template/",
+                // "--from", "/data2/tyolab/web/themes/elite-shop-premium/template",
+                "--to", "/data2/tyolab/web/tyolab/tyo.com.au",
+                // "--to", "/data2/tyolab/web/shop/shoes-ecommerce/shop-frontend",
                 // "--to", "/data/tyolab/web/tyolab/store.tyo.com.au",
                 // "--from", "/data/tyolab/web/themes-html/azir/HTML/app/",
-                // "--to", "//data/tyolab/clients/Andy/meta-agent/",
+                // "--to", "/data/tyolab/clients/Andy/meta-agent/",
                 "--engine", "nextjs",
                 "--strip_layout", "false",
+                "--replace_partial", "false",
                 // "--page", "contact",
                 // "--page", "about",
                 // "--page", "services",
                 // "--page", "features",
                 // "--page", "home",
-                "--page", "account",
+                "--page", "home2",
                 // "--page", "myaccount",
                 // "--page", "checkout",
                 // "--page", "cart",
@@ -64,7 +66,7 @@
                 // "--section", "overview,footer",
                 // "--section", "profile-details,footer",
                 // "--section", "product-details,testimonial,related-product,footer",
-                "--section", "forgot-password",
+                "--section", "banner,features,introduction1,introduction2,testimonials,services,subscription,footer",
                 // "contact.html"
                 // "about.html"
                 // "services.html"
@@ -78,7 +80,8 @@
                 // "address.html"
                 // "product-single.html"
                 // "shipping.html"
-                "forget-password.html"
+                // "career.html"
+                "homepage2.html"
             ]
         },
         {

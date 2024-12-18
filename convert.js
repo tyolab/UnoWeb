@@ -21,6 +21,7 @@ var optsAvailable = {
     'engine': 'jekyll',
     'page': 'home',
     'strip_layout': true,
+    'replace_partial': false,
     'mode': 'xml', // could be xml, html, text,
     'overwrite': false,
     'section': "",
